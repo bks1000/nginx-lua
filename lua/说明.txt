@@ -5,3 +5,9 @@ test3.py生成时间戳和token 是测试test3.lua用的。
 
 
 在实际应用中，还是使用cookie验证身份，注意防篡改。
+
+
+app.lua 是 lua 访问 mongodb的示例程序
+
+
+hello.lua是 lua ffi访问 C动态链接库的示例程序

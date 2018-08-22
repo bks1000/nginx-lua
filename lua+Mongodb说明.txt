@@ -1,0 +1,30 @@
+lua/app.lua 是 lua 操作 mongodb 数据库，需要驱动
+
+lua-resty-mongol - Lua Mongodb driver for ngx_lua base on the cosocket API  驱动安装
+https://github.com/bigplum/lua-resty-mongol
+Installation
+$make install
+因为本身在windows上运行openresty 所以，不能这样安装。打开Makefile文件，查看安装逻辑
+
+Makefile
+OPENRESTY_PREFIX=/usr/local/openresty
+
+PREFIX ?= /usr/local/openresty
+LUA_INCLUDE_DIR ?= $(PREFIX)/include
+LUA_LIB_DIR ?= $(PREFIX)/lualib
+INSTALL ?= install
+
+.PHONY: all test install
+
+all: ;
+
+install: all
+	$(INSTALL) -d $(LUA_LIB_DIR)/resty/mongol
+	$(INSTALL) lib/resty/mongol/*.lua $(LUA_LIB_DIR)/resty/mongol
+
+
+test:
+	PATH=$(OPENRESTY_PREFIX)/nginx/sbin:$$PATH prove -I../test-nginx/lib -r t
+
+
+主要就是把lib/resty/mongol/*.lua  复制到 openresty/lualib/resty/mongol里
